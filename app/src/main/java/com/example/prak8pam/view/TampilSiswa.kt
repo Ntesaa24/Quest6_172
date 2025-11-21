@@ -61,3 +61,14 @@ fun TampilData(
 					}
 					HorizontalDivider(thickness = 1.dp, color = colorResource(id=R.color.pink_pastel))
 				}
+				Spacer(modifier = Modifier.height(10.dp))
+				Button(
+					modifier = Modifier.fillMaxWidth(),
+					onClick = onBackButtonClicked,
+					colors = ButtonDefaults.buttonColors(colorResource(id = R.color.pink_pastel))) {
+					Text(text = stringResource(id = R.string.back))
+				}
+			}
+		}
+	}
+}

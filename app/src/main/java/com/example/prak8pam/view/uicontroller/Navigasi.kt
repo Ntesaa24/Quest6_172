@@ -1,55 +1,33 @@
 package com.example.prak8pam.view.uicontroller
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.prak8pam.model.DataJK.JenisK
+import com.example.prak8pam.model.Siswa
 import com.example.prak8pam.view.FormIsian
-import com.example.prak8pam.view.TampilData
+import com.example.prak8pam.viewmodel.SiswaViewModel
 
 
 enum class Navigasi {
-	Formulirku,
+	Formulir,
 	Detail
 }
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DataApp(
+fun SiswaApp(
+	//edit 1 : parameter viewModel
+	modifier: Modifier,
+	viewModel: SiswaViewModel = viewModel(),
 	navController: NavHostController = rememberNavController()
-){
-	Scaffold { isiRuang ->
-		NavHost(
-			navController = navController,
-			startDestination = Navigasi.Formulirku.name,
-
-			modifier = Modifier.padding( isiRuang)){
-			composable(route = Navigasi.Formulirku.name){
-				FormIsian(
-					//pilihanJK = JenisK.map { is -> konteks,resources.getString(id},
-					OnSubmitBtnClick = {
-						navController.navigate(Navigasi.Detail.name)
-					}
-				)
-			}
-			composable(route = Navigasi.Detail.name){
-				TampilData(
-					onBackBtnClick = {
-						cancelAndBackToFormulir(navController)
-					}
-				)
-			}
-		}
-
-	}
-}
-
-fun cancelAndBackToFormulir(
-	navController: NavController
-) {
-	navController.popBackStack(Navigasi.Formulirku.name, inclusive = false)
-}
+)
